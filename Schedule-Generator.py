@@ -58,6 +58,7 @@ class MainWindow(object):
         master.title('Login')
         master.geometry('300x200')
         master.resizable(width=False, height=False)
+        master.configure(bg='#FB8525')
 
         self.header = Label(master, font=(None, 20), text='ล็อกอินเข้าสู่ระบบ')
         self.header.pack()
