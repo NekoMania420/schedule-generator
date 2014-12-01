@@ -56,8 +56,8 @@ class MainWindow(object):
         '''Initial function.'''
         self.master = master
         master.title('Login')
-        master.geometry('800x600')
-        master.resizable(width=True, height=False)
+        master.geometry('290x120')
+        master.resizable(width=False, height=False)
 
         self.header = Label(master, font=(None, 20), text='ล็อกอินเข้าสู่ระบบ')
         self.header.grid(row=0, columnspan=2)
@@ -74,7 +74,10 @@ class MainWindow(object):
         self.passwd_input = Entry(master)
         self.passwd_input.grid(row=2, column=1, sticky=W)
 
-        for col in xrange(3):
+        self.submit_button = Button(master, text='Get!')
+        self.submit_button.grid(row=3, columnspan=2)
+
+        for col in xrange(2):
             master.grid_columnconfigure(col, weight=1)
 
 if __name__ == '__main__':
