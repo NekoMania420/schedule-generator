@@ -13,13 +13,14 @@ IT@KMITL
 from Tkinter import *
 import mechanize
 import getpass
-
+import time
+import tkMessageBox
 class RequestRegistra(object):
 
 
     def request_data(self):
         '''Get raw schedule table from KMITL Registra.'''
-
+        self.start_time = time.time()
         br = mechanize.Browser()
         br.set_handle_robots(False)
         br.set_handle_refresh(False)
@@ -50,6 +51,7 @@ class RequestRegistra(object):
             f.write(data)
             f.close()
 
+
 class MainWindow(object):
 
     def __init__(self, master):
@@ -71,7 +73,7 @@ class MainWindow(object):
         self.passwd_label = Label(master, text='Password:')
         self.passwd_label.grid(row=2, sticky=E)
 
-        self.passwd_input = Entry(master)
+        self.passwd_input = Entry(master, show="*")
         self.passwd_input.grid(row=2, column=1, sticky=W)
 
         self.submit_button = Button(master, text='Get!')
@@ -81,10 +83,10 @@ class MainWindow(object):
             master.grid_columnconfigure(col, weight=1)
 
 if __name__ == '__main__':
+    root = Tk()
+    app = MainWindow(root)
     #req = RequestRegistra()
     #req.username = raw_input()
     #req.passwd = getpass.getpass()
     #req.request_data()
-    root = Tk()
-    app = MainWindow(root)
     root.mainloop()
