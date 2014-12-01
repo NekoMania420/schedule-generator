@@ -15,6 +15,8 @@ import mechanize
 import getpass
 import time
 import tkMessageBox
+
+
 class RequestRegistra(object):
 
 
@@ -76,17 +78,20 @@ class MainWindow(object):
         self.passwd_input = Entry(master, show="*")
         self.passwd_input.grid(row=2, column=1, sticky=W)
 
-        self.submit_button = Button(master, text='Get!')
+        self.submit_button = Button(master, text='Get!', command=self.send_data)
         self.submit_button.grid(row=3, columnspan=2)
 
         for col in xrange(2):
             master.grid_columnconfigure(col, weight=1)
 
+    def send_data(self):
+        req = RequestRegistra()
+        req.username = self.username_input.get()
+        req.passwd = self.passwd_input.get()
+        req.request_data()
+
+
 if __name__ == '__main__':
     root = Tk()
     app = MainWindow(root)
-    #req = RequestRegistra()
-    #req.username = raw_input()
-    #req.passwd = getpass.getpass()
-    #req.request_data()
     root.mainloop()
