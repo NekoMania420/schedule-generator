@@ -56,12 +56,26 @@ class MainWindow(object):
         '''Initial function.'''
         self.master = master
         master.title('Login')
-        master.geometry('300x200')
-        master.resizable(width=False, height=False)
-        master.configure(bg='#FB8525')
+        master.geometry('800x600')
+        master.resizable(width=True, height=False)
 
         self.header = Label(master, font=(None, 20), text='ล็อกอินเข้าสู่ระบบ')
-        self.header.pack()
+        self.header.grid(row=0, columnspan=2)
+
+        self.username_label = Label(master, text='Username:')
+        self.username_label.grid(row=1, sticky=E)
+
+        self.username_input = Entry(master)
+        self.username_input.grid(row=1, column=1, sticky=W)
+
+        self.passwd_label = Label(master, text='Password:')
+        self.passwd_label.grid(row=2, sticky=E)
+
+        self.passwd_input = Entry(master)
+        self.passwd_input.grid(row=2, column=1, sticky=W)
+
+        for col in xrange(3):
+            master.grid_columnconfigure(col, weight=1)
 
 if __name__ == '__main__':
     #req = RequestRegistra()
