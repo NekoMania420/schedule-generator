@@ -15,6 +15,7 @@ import mechanize
 import getpass
 import time
 import tkMessageBox
+from bs4 import BeautifulSoup
 
 
 class RequestRegistra(object):
@@ -44,6 +45,10 @@ class RequestRegistra(object):
         br['year'] = ['2557']
         br['semester'] = ['1']
         response = br.submit()
+
+        soup = BeautifulSoup(response.get_data())
+        response.set_data(soup.prettify('utf-8'))
+
         self.write_to_file(response.get_data())
 
     def write_to_file(self, data):
@@ -52,6 +57,8 @@ class RequestRegistra(object):
         with open('data.html','w+') as f:
             f.write(data)
             f.close()
+
+        tkMessageBox.showinfo('Done!', '%.3f s.' % (time.time()-self.start_time))
 
 
 class MainWindow(object):
