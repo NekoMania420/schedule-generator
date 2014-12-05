@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 from datetime import date
 from xlwt import Workbook, XFStyle, Borders, Pattern, Font
 fnt = Font()
@@ -15,8 +18,8 @@ style.num_format_str='YYYY-MM-DD'
 style.font = fnt
 style.borders = borders
 style.pattern = pattern
-book = Workbook()
+book = Workbook(encoding='UTF-8')
 sheet = book.add_sheet('A Date')
 sheet.write(1,1,date(2009,3,18),style)
-sheet.write(2,2,'yoooooooooo',style)
+sheet.write(2,2,' ก็ไม่รู้สินะ',style)
 book.save('date.xls')
