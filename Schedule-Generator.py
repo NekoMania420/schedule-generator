@@ -66,10 +66,28 @@ class MainWindow(object):
     def __init__(self, master):
         '''Initial function.'''
         self.master = master
-        master.title('Login')
+        master.title('Schedule.GEN')
         master.geometry('290x120')
         master.resizable(width=False, height=False)
 
+        # Menubar
+        menubar = Menu(master)
+
+        filemenu = Menu(menubar, tearoff=False)
+        filemenu.add_command(label="Quit", command=quit, underline=0, accelerator="Ctrl+Q")
+        menubar.add_cascade(label="File", menu=filemenu, underline=0)
+
+        helpmenu = Menu(menubar, tearoff=False)
+        helpmenu.add_command(label="How to use?", command=quit, underline=0)
+        helpmenu.add_separator()
+        helpmenu.add_command(label="About...", command=quit, underline=0)
+        menubar.add_cascade(label="Help", menu=helpmenu, underline=0)
+
+        master.config(menu=menubar)
+
+        master.bind_all("<Control-q>", self.quit)
+
+        # Contents
         self.header = Label(master, font=(None, 20), text='ล็อกอินเข้าสู่ระบบ')
         self.header.grid(row=0, columnspan=2)
 
@@ -96,6 +114,9 @@ class MainWindow(object):
         req.username = self.username_input.get()
         req.passwd = self.passwd_input.get()
         req.request_data()
+
+    def quit(self, event):
+    	root.destroy()
 
 
 if __name__ == '__main__':
