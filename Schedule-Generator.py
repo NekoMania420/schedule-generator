@@ -11,12 +11,12 @@ IT@KMITL
 '''
 
 from Tkinter import *
+import tkMessageBox
+import tkFont
 import mechanize
 import getpass
 import time
-import tkMessageBox
 from bs4 import BeautifulSoup
-
 
 class RequestRegistra(object):
 
@@ -78,9 +78,9 @@ class MainWindow(object):
         menubar.add_cascade(label="File", menu=filemenu, underline=0)
 
         helpmenu = Menu(menubar, tearoff=False)
-        helpmenu.add_command(label="How to use?", command=quit, underline=0)
+        helpmenu.add_command(label="How to use?", command=self.how_to_use, underline=0)
         helpmenu.add_separator()
-        helpmenu.add_command(label="About...", command=quit, underline=0)
+        helpmenu.add_command(label="About...", command=self.call_about, underline=0)
         menubar.add_cascade(label="Help", menu=helpmenu, underline=0)
 
         master.config(menu=menubar)
@@ -117,6 +117,81 @@ class MainWindow(object):
 
     def quit(self, event):
     	root.destroy()
+
+    def call_about(self):
+    	About().mainloop()
+
+    def how_to_use(self):
+    	HowToUse().mainloop()
+
+
+class About(Tk):
+
+	def __init__(self):
+		Tk.__init__(self)
+
+		self.title("About")
+		self.geometry("400x300")
+		self.resizable(width=False, height=False)
+
+		window_frame = Frame(self)
+		window_frame.pack(expand=1)
+
+		Label(window_frame, text="Schedule.GEN", font="None 20").pack()
+		Label(window_frame, text="Generate schedule table from KMITL Registra").pack()
+		Label(window_frame, text="Version 0.01").pack(pady=(20, 0))
+
+		author_frame = Label(window_frame)
+		author_frame.pack(pady=(20, 0))
+
+		Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold")).pack()
+		Label(author_frame, text="Suchaj Jongprasit (57070132)").pack()
+		Label(author_frame, text="Seksan Neramitthanasombat (57070137)").pack()
+
+		button_area = Frame(window_frame)
+		button_area.pack(pady=10)
+
+		Button(button_area, text="License", command=self.call_license).pack(side=LEFT)
+		Button(button_area, text="Close", command=self.destroy).pack(side=LEFT)
+
+	def call_license(self):
+		License().mainloop()
+
+
+class HowToUse(Tk):
+
+	def __init__(self):
+		Tk.__init__(self)
+
+		self.title("How to use?")
+		self.geometry("300x70")
+		self.resizable(width=False, height=False)
+
+		label_frame = Frame(self)
+		label_frame.pack(expand=1)
+
+		Label(label_frame, text="1. Input your username and password").pack(anchor=W)
+		Label(label_frame, text="2. Press 'Get!' button").pack(anchor=W)
+
+
+class License(Tk):
+
+	def __init__(self):
+		Tk.__init__(self)
+
+		self.title("License")
+
+		string = open("LICENSE", "r").read()
+
+		scrollbar = Scrollbar(self)
+		scrollbar.pack(side=RIGHT, fill=Y)
+
+		textarea = Text(self, width=80, yscrollcommand=scrollbar.set)
+		textarea.insert(END, string)
+		textarea.config(state=DISABLED)
+		textarea.pack(fill=BOTH, expand=1)
+
+		scrollbar.config(command=textarea.yview)
 
 
 if __name__ == '__main__':
