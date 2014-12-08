@@ -23,6 +23,7 @@ class RequestRegistra(object):
 
     def request_data(self):
         """Get raw schedule table from KMITL Registra."""
+
         self.start_time = time.time()
         br = mechanize.Browser()
         br.set_handle_robots(False)
@@ -61,18 +62,18 @@ class RequestRegistra(object):
         tkMessageBox.showinfo("Done!", "%.3f s." % (time.time()-self.start_time))
 
 
-class MainWindow(Tk):
+class MainWindow(object):
 
-    def __init__(self):
+    def __init__(self, master):
         """Initial function."""
-        Tk.__init__(self)
 
-        self.title("Schedule.GEN")
-        self.geometry("290x120")
-        self.resizable(0, 0)
+        self.master = master
+        master.title("Schedule.GEN")
+        master.geometry("290x120")
+        master.resizable(0, 0)
 
         # Menubar
-        menubar = Menu(self)
+        menubar = Menu(master)
 
         filemenu = Menu(menubar, tearoff=False)
         filemenu.add_command(label="Quit", command=quit, underline=0, accelerator="Ctrl+Q")
@@ -84,31 +85,31 @@ class MainWindow(Tk):
         helpmenu.add_command(label="About...", command=self.call_about, underline=0)
         menubar.add_cascade(label="Help", menu=helpmenu, underline=0)
 
-        self.config(menu=menubar)
+        master.config(menu=menubar)
 
-        self.bind_all("<Control-q>", self.quit)
+        master.bind_all("<Control-q>", self.quit)
 
         # Contents
-        self.header = Label(self, font=(None, 20), text="ล็อกอินเข้าสู่ระบบ")
+        self.header = Label(master, font=(None, 20), text="ล็อกอินเข้าสู่ระบบ")
         self.header.grid(row=0, columnspan=2)
 
-        self.username_label = Label(self, text="Username:")
+        self.username_label = Label(master, text="Username:")
         self.username_label.grid(row=1, sticky=E)
 
-        self.username_input = Entry(self)
+        self.username_input = Entry(master)
         self.username_input.grid(row=1, column=1, sticky=W)
 
-        self.passwd_label = Label(self, text="Password:")
+        self.passwd_label = Label(master, text="Password:")
         self.passwd_label.grid(row=2, sticky=E)
 
-        self.passwd_input = Entry(self, show="*")
+        self.passwd_input = Entry(master, show="*")
         self.passwd_input.grid(row=2, column=1, sticky=W)
 
-        self.submit_button = Button(self, text="Get!", command=self.send_data)
+        self.submit_button = Button(master, text="Get!", command=self.send_data)
         self.submit_button.grid(row=3, columnspan=2)
 
         for col in xrange(2):
-            self.grid_columnconfigure(col, weight=1)
+            master.grid_columnconfigure(col, weight=1)
 
     def send_data(self):
         req = RequestRegistra()
@@ -183,6 +184,7 @@ class License(Tk):
 		Tk.__init__(self)
 
 		self.title("License")
+		self.resizable(0, 0)
 
 		string = open("LICENSE", "r").read()
 
@@ -198,5 +200,5 @@ class License(Tk):
 
 
 if __name__ == "__main__":
-    app = MainWindow()
-    app.mainloop()
+    root = Tk()
+    app = MainWindow(root)
