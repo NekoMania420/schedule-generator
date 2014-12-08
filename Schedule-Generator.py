@@ -164,7 +164,7 @@ class HowToUse(Tk):
 		Tk.__init__(self)
 
 		self.title("How to use?")
-		self.geometry("300x70")
+		self.geometry("300x100")
 		self.resizable(0, 0)
 
 		label_frame = Frame(self)
@@ -172,6 +172,8 @@ class HowToUse(Tk):
 
 		Label(label_frame, text="1. Input your username and password").pack(anchor=W)
 		Label(label_frame, text="2. Press 'Get!' button").pack(anchor=W)
+
+		Button(label_frame, text="Close", command=self.destroy).pack()
 
 
 class License(Tk):
