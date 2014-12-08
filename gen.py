@@ -87,8 +87,8 @@ def main_table(sheet):
     sheet.write(5,0,'Thu', style)
     sheet.write(6,0,'Fri', style)
 
-    sheet.write_merge(1,1,1,2,'8.00-9.00', style)
-    sheet.write_merge(1,1,3,4,'9.00-10.00', style)
+    sheet.write_merge(1,1,1,2,'08.00-09.00', style)
+    sheet.write_merge(1,1,3,4,'09.00-10.00', style)
     sheet.write_merge(1,1,5,6,'10.00-11.00', style)
     sheet.write_merge(1,1,7,8,'11.00-12.00', style)
     sheet.write_merge(1,1,9,10,'12.00-13.00', style)
