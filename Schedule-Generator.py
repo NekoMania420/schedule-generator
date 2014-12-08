@@ -68,7 +68,7 @@ class MainWindow(object):
         self.master = master
         master.title('Schedule.GEN')
         master.geometry('290x120')
-        master.resizable(width=False, height=False)
+        master.resizable(0, 0)
 
         # Menubar
         menubar = Menu(master)
@@ -132,7 +132,7 @@ class About(Tk):
 
 		self.title("About")
 		self.geometry("400x300")
-		self.resizable(width=False, height=False)
+		self.resizable(0, 0)
 
 		window_frame = Frame(self)
 		window_frame.pack(expand=1)
@@ -165,7 +165,7 @@ class HowToUse(Tk):
 
 		self.title("How to use?")
 		self.geometry("300x70")
-		self.resizable(width=False, height=False)
+		self.resizable(0, 0)
 
 		label_frame = Frame(self)
 		label_frame.pack(expand=1)
@@ -180,6 +180,7 @@ class License(Tk):
 		Tk.__init__(self)
 
 		self.title("License")
+		self.resizable(0, 0)
 
 		string = open("LICENSE", "r").read()
 
