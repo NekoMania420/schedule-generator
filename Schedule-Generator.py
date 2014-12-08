@@ -184,7 +184,6 @@ class License(Tk):
 		Tk.__init__(self)
 
 		self.title("License")
-		self.resizable(0, 0)
 
 		string = open("LICENSE", "r").read()
 
@@ -202,3 +201,4 @@ class License(Tk):
 if __name__ == "__main__":
     root = Tk()
     app = MainWindow(root)
+    root.mainloop()
