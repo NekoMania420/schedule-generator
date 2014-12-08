@@ -35,13 +35,13 @@ def main_table(sheet):
     #pattern.easyxf("align: horiz center")
     first_col = sheet.col(0)
     first_col.width = 256 * 6
-    for i in xrange(1, 23):
+    for i in xrange(1, 25):
         first_col = sheet.col(i)
-        first_col.width = 256 * 11
+        first_col.width = 256 * 5
         if i <= 6:
             first_row = sheet.row(i)
             #first_row.height_mismatch = True
-            first_row.height = 256 * 4
+            first_row.height = 256 * 5
 
     alignment = Alignment()
     alignment.horz = Alignment.HORZ_CENTER
@@ -84,7 +84,7 @@ def main_table(sheet):
     style2 = XFStyle()
     style2.pattern = pattern2
     style2.alignment = alignment
-    sheet.write_merge(2,2,1,4,'BUSINESS FUNDAMENTALS FOR INFORMATION TECHNOLOGY', style2)
+    sheet.write_merge(2,2,1,4,'BUSINESS FUNDAMENTALS FOR INFORMATION TECHNOLOGY \n (ไอที M23)', style2)
 
 book = Workbook(encoding='UTF-8')
 sheet = book.add_sheet('A Date')
