@@ -17,6 +17,7 @@ import mechanize
 import getpass
 import time
 from bs4 import BeautifulSoup
+import pygame
 
 
 class RequestRegistra(object):
@@ -69,8 +70,10 @@ class MainWindow(object):
 
         self.master = master
         master.title("Schedule.GEN")
-        master.geometry("290x120")
+        master.geometry("290x220")
         master.resizable(0, 0)
+
+        BackgroundMusic()
 
         # Menubar
         menubar = Menu(master)
@@ -90,8 +93,8 @@ class MainWindow(object):
         master.bind_all("<Control-q>", self.quit)
 
         # Contents
-        self.header = Label(master, font=(None, 20), text="ล็อกอินเข้าสู่ระบบ")
-        self.header.grid(row=0, columnspan=2)
+        self.header = Label(master, font=(None, 20), text="Schedule.GEN")
+        self.header.grid(row=0, columnspan=2, pady=20)
 
         self.username_label = Label(master, text="Username:")
         self.username_label.grid(row=1, sticky=E)
@@ -106,7 +109,19 @@ class MainWindow(object):
         self.passwd_input.grid(row=2, column=1, sticky=W)
 
         self.submit_button = Button(master, text="Get!", command=self.send_data)
-        self.submit_button.grid(row=3, columnspan=2)
+        self.submit_button.grid(row=3, columnspan=2, pady=20)
+
+        # Element configuration
+        master.config(bg="#111")
+        menubar.config(bg="#111", fg="#fff", activebackground="#fff", borderwidth=0)
+        filemenu.config(bg="#111", fg="#fff", activebackground="#fff")
+        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff")
+        self.header.config(bg="#111", fg="#fff")
+        self.username_label.config(bg="#111", fg="#fff")
+        self.username_input.config(bg="#111", fg="#fff", insertbackground="#fff")
+        self.passwd_label.config(bg="#111", fg="#fff")
+        self.passwd_input.config(bg="#111", fg="#fff", insertbackground="#fff")
+        self.submit_button.config(bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff", height=2, width=10)
 
         for col in xrange(2):
             master.grid_columnconfigure(col, weight=1)
@@ -135,26 +150,30 @@ class About(Tk):
 		self.title("About")
 		self.geometry("400x300")
 		self.resizable(0, 0)
+		self.config(bg="#111")
 
 		window_frame = Frame(self)
 		window_frame.pack(expand=1)
+		window_frame.config(bg="#111")
 
-		Label(window_frame, text="Schedule.GEN", font="None 20").pack()
-		Label(window_frame, text="Generate schedule table from KMITL Registra").pack()
-		Label(window_frame, text="Version 0.01").pack(pady=(20, 0))
+		Label(window_frame, text="Schedule.GEN", font="None 20", bg="#111", fg="#fff").pack()
+		Label(window_frame, text="Generate schedule table from KMITL Registra", bg="#111", fg="#fff").pack()
+		Label(window_frame, text="Version 0.01", bg="#111", fg="#fff").pack(pady=(20, 0))
 
 		author_frame = Label(window_frame)
 		author_frame.pack(pady=(20, 0))
+		author_frame.config(bg="#111")
 
-		Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold")).pack()
-		Label(author_frame, text="Suchaj Jongprasit (57070132)").pack()
-		Label(author_frame, text="Seksan Neramitthanasombat (57070137)").pack()
+		Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold"), bg="#111", fg="#fff").pack()
+		Label(author_frame, text="Suchaj Jongprasit (57070132)", bg="#111", fg="#fff").pack()
+		Label(author_frame, text="Seksan Neramitthanasombat (57070137)", bg="#111", fg="#fff").pack()
 
 		button_area = Frame(window_frame)
 		button_area.pack(pady=10)
+		button_area.config(bg="#111")
 
-		Button(button_area, text="License", command=self.call_license).pack(side=LEFT)
-		Button(button_area, text="Close", command=self.destroy).pack(side=LEFT)
+		Button(button_area, text="License", command=self.call_license, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack(side=LEFT)
+		Button(button_area, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack(side=LEFT)
 
 	def call_license(self):
 		License().mainloop()
@@ -168,14 +187,16 @@ class HowToUse(Tk):
 		self.title("How to use?")
 		self.geometry("300x100")
 		self.resizable(0, 0)
+		self.config(bg="#111")
 
 		label_frame = Frame(self)
 		label_frame.pack(expand=1)
+		label_frame.config(bg="#111")
 
-		Label(label_frame, text="1. Input your username and password").pack(anchor=W)
-		Label(label_frame, text="2. Press 'Get!' button").pack(anchor=W)
+		Label(label_frame, text="1. Input your username and password", bg="#111", fg="#fff").pack(anchor=W)
+		Label(label_frame, text="2. Press 'Get!' button", bg="#111", fg="#fff").pack(anchor=W)
 
-		Button(label_frame, text="Close", command=self.destroy).pack()
+		Button(label_frame, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack()
 
 
 class License(Tk):
@@ -196,6 +217,15 @@ class License(Tk):
 		textarea.pack(fill=BOTH, expand=1)
 
 		scrollbar.config(command=textarea.yview)
+
+
+class BackgroundMusic(object):
+
+	def __init__(self):
+		pygame.init()
+
+		pygame.mixer.music.load("music.mp3")
+		pygame.mixer.music.play(-1)
 
 
 if __name__ == "__main__":
