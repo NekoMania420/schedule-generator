@@ -6,7 +6,7 @@ Project: Schedule.GEN
 Version: 0.01
 App by:
     Suchaj Jongprasit (57070132)
-    Seksan Neramitthanasombat (57070132)
+    Seksan Neramitthanasombat (57070137)
 IT@KMITL
 """
 
