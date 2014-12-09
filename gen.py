@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+# ssss
 '''
 จำนวนวิชา
 เวลา(list)
