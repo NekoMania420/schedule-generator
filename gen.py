@@ -13,7 +13,7 @@ import random
 list_color= [0x21, 0x0B, 0x35, 0x11, 0x016, 0x012, 0x0D, 0x10, 0x17, 0x0C, 0x0F]
 fnt = Font()
 fnt.name = 'Arial'
-
+'''
 num = 8
 list_time = ['09:00-12:00', '13:00-15:00', '13:00-16:00', '09:00-11:00', '15:00-18:00', '09:00-12:00', '14:00-16:00', '09:00-11:00']
 list_day = ['Thu', 'Thu', 'Tue', 'Wed', 'Mon', 'Mon', 'Fri', 'Fri']
@@ -21,6 +21,11 @@ list_name = ['MATHEMATICS FOR INFORMATION TECHNOLOGY'
     , 'COMPUTER PROGRAMMING', 'COMPUTER SYSTEMS ORGANIZATION AND OPERATING SYSTEM'
     , 'MULTIMEDIA AND WEB TECHNOLOGY', 'THAI GEOSOCIAL DESIGN'
     , 'FOUNDATION ENGLISH 2', 'COMPUTER PROGRAMMING[Lab]', 'MULTIMEDIA AND WEB TECHNOLOGY[Lab]']
+'''
+num = input()
+list_time = raw_input()
+list_day = raw_input()
+list_name = raw_input()
 
 main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 main_time = ['0', '08:00', '08:30', '09:00', '09.30', '10.00'
@@ -81,7 +86,7 @@ def main_table(sheet):
 
     #sheet.write_merge(0, 0, 0, 1, 'Long Cell', style)
 
-    sheet.write(1,0,'012', style)
+    sheet.write(1,0,'', style)
     sheet.write(2,0,'Mon', style)
     sheet.write(3,0,'Tue', style)
     sheet.write(4,0,'Wed', style)
@@ -132,16 +137,16 @@ def main_table(sheet):
     i=0
     for j in xrange(2, 7):
         cou = 1
-        #print 2
+
         while True:
-            #print 3
+
             if cou>24:
                 break
             if list_test[i][0] != j:
                 break
             if list_test[i][2] >= cou+2:
                 sheet.write_merge(j,j,cou,cou+1,'', style3)
-                #print '1'
+
                 cou += 2
             else:
                 cou = list_test[i][3]+1
@@ -161,8 +166,6 @@ def main_table(sheet):
 book = Workbook(encoding='UTF-8')
 sheet = book.add_sheet('A Date')
 
-#sheet.write(1,1,'00')#,style)
-#sheet.write(2,2,' ก็ไม่รู้สินะ')#,style)
 main_table(sheet)
 sheet.portrait = False
 book.save('date.xls')
