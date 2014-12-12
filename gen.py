@@ -34,8 +34,7 @@ list_day = input()
 list_name = input()
 
 for i in xrange(len(list_name)):
-    print list_name[i]
-    print type(list_name[i])
+
     if list_name[i].count('INFORMATION TECHNOLOGY FUNDAMENTALS')>=1:
         list_name.append('INFORMATION TECHNOLOGY FUNDAMENTALS')
         list_day.append('Thu')
@@ -93,10 +92,7 @@ for i in xrange(len(list_name)):
         list_name[i]=list_name[i][:len(list_name[i])-4]+'[Lab]'
     else:
         list_name[i]=list_name[i][:len(list_name[i])-4]
-print num
-print list_time
-print list_day
-print list_name
+
 
 main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 main_time = ['0', '08:00', '08:30', '09:00', '09.30', '10.00'
@@ -114,6 +110,8 @@ def main_table(sheet):
     pattern = Pattern()
     pattern.pattern = Pattern.SOLID_PATTERN
     pattern.pattern_fore_colour = random.choice(list_color)
+    print pattern.pattern_fore_colour
+    color = pattern.pattern_fore_colour , '+'
     #pattern.easyxf("align: horiz center")
     first_col = sheet.col(0)
     first_col.width = 256 * 6
@@ -136,7 +134,7 @@ def main_table(sheet):
     style.alignment = alignment
     style.alignment.wrap = 1
 
-    print sheet.col(0)
+    #print sheet.col(0)
     sheet.write(1,0,'', style)
     sheet.write(2,0,'Mon', style)
     sheet.write(3,0,'Tue', style)
@@ -160,7 +158,11 @@ def main_table(sheet):
     for i in xrange(num):
         pattern2 = Pattern()
         pattern2.pattern = Pattern.SOLID_PATTERN
-        pattern2.pattern_fore_colour = random.choice(list_color)
+        while True:
+            pattern2.pattern_fore_colour = random.choice(list_color)
+            if color.count(pattern2.pattern_fore_colour)== 0:
+                color = pattern2.pattern_fore_colour , '+'
+                break
         style2 = XFStyle()
         style2.pattern = pattern2
         style2.alignment = alignment
@@ -168,7 +170,7 @@ def main_table(sheet):
         #print 1
         sheet.write_merge(main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1,list_name[i], style2)
         list_test.append([main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1])
-    print sorted(list_test)
+    #print sorted(list_test)
     list_test = sorted(list_test)
     pattern3 = Pattern()
     pattern3.pattern = Pattern.SOLID_PATTERN
