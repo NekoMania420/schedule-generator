@@ -68,7 +68,7 @@ class RequestRegistra(object):
             f.write(data)
             f.close()
 
-        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s." % (time.time()-self.start_time))
+        
 
     def export_string(self):
         import string_filter
@@ -77,6 +77,7 @@ class RequestRegistra(object):
             string_filter.string_filter(f)
         import gen
         gen.gen()
+        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s." % (time.time()-self.start_time))
 
 
 
