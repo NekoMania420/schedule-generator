@@ -17,7 +17,7 @@ import mechanize
 import getpass
 import time
 from bs4 import BeautifulSoup
-import string_filter
+
 
 
 class RequestRegistra(object):
@@ -71,8 +71,13 @@ class RequestRegistra(object):
         tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s." % (time.time()-self.start_time))
 
     def export_string(self):
+        import string_filter
+        
         with open("data.html", "r") as f:
             string_filter.string_filter(f)
+        import gen
+        gen.gen()
+
 
 
 class MainWindow(object):
@@ -252,6 +257,8 @@ class License(Tk):
 
 
 if __name__ == "__main__":
+    #import string_filter
+    #import gen
     root = Tk()
     app = MainWindow(root)
     root.mainloop()
