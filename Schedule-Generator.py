@@ -145,8 +145,8 @@ class MainWindow(object):
         # Element configuration
         master.config(bg="#111")
         menubar.config(bg="#111", fg="#fff", activebackground="#fff", borderwidth=0)
-        filemenu.config(bg="#111", fg="#fff", activebackground="#fff")
-        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff")
+        filemenu.config(bg="#111", fg="#fff", activebackground="#fff", activeforeground="#111")
+        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff", activeforeground="#111")
         self.header.config(bg="#111", fg="#fff")
         self.username_label.config(bg="#111", fg="#fff")
         self.username_input.config(bg="#111", fg="#fff", insertbackground="#fff")
