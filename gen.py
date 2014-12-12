@@ -10,98 +10,104 @@
 #from datetime import date
 from xlwt import *
 import random
-list_color= [0x21, 0x0B, 0x35, 0x11, 0x016, 0x012, 0x0D, 0x10, 0x17, 0x0C, 0x0F]
-fnt = Font()
-fnt.name = 'Arial'
-list_name = []
-list_day=[]
-list_time=[]
-change_day = ['จ.', 'Mon', 'อ.', 'Tue', 'พ.' ,'Wed', 'พฤ.', 'Thu', 'ศ.', 'Fri']
-with open("filtered.txt", "r+") as f:
-    #for i in xrange()
-    #aaa = f.read().index('\n')
-    aaa = f.read().split('\n')
-    num = (len(aaa)/5)
-    for i in xrange(len(aaa)-3):
-        if i % 5==0:
-            list_name.append(aaa[i]+' (' +(aaa[i+3].translate(None, ' '))+', '+ aaa[i+4]+') ['+aaa[i+1]+']')
-            list_day.append(change_day[change_day.index(aaa[i+2][:aaa[i+2].index(' ')])+1])
-            list_time.append((aaa[i+2][aaa[i+2].index(' ')+1:len(aaa[i+2])-5]))
 
-    f.close()
-print num
-print list_name
-print list_time
-print list_day
+def gen():
 
-for i in xrange(len(list_name)):
+    book = Workbook(encoding='UTF-8')
+    sheet = book.add_sheet('A Date')
+    list_color= [0x21, 0x0B, 0x35, 0x11, 0x016, 0x012, 0x0D, 0x10, 0x17, 0x0C, 0x0F]
+    fnt = Font()
+    fnt.name = 'Arial'
+    list_name = []
+    list_day=[]
+    list_time=[]
+    change_day = ['จ.', 'Mon', 'อ.', 'Tue', 'พ.' ,'Wed', 'พฤ.', 'Thu', 'ศ.', 'Fri']
+    with open("filtered.txt", "r+") as f:
+        #for i in xrange()
+        #aaa = f.read().index('\n')
+        aaa = f.read().split('\n')
 
-    if list_name[i].count('INFORMATION TECHNOLOGY FUNDAMENTALS')>=1:
-        list_name.append('INFORMATION TECHNOLOGY FUNDAMENTALS [Lab]')
-        list_day.append('Thu')
-        num += 1
-        if list_name[i].count('[1]')>=1:
-            list_time.append('09:00-11:00')
-        elif list_name[i].count('[2]')>=1:
-            list_time.append('12:00-14:00')
-        else:
-            list_time.append('14:00-16:00')
-        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
-    elif list_name[i].count('PROBLEM SOLVING IN INFORMATION TECHNOLOGY')>=1:
-        list_name.append('PROBLEM SOLVING IN INFORMATION TECHNOLOGY [Lab]')
-        list_day.append('Thu')
-        num += 1
-        if list_name[i].count('[1]')>=1:
-            list_time.append('14:00-16:00')
-        elif list_name[i].count('[2]')>=1:
-            list_time.append('09:00-11:00')
-        else:
-            list_time.append('12:00-14:00')
-        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
-    elif list_name[i].count('INTRODUCTION TO COMPUTER SYSTEMS')>=1:
-        list_name.append('INTRODUCTION TO COMPUTER SYSTEMS [Lab]')
-        list_day.append('Thu')
-        num += 1
-        if list_name[i].count('[1]')>=1:
-            list_time.append('12:00-14:00')
-        elif list_name[i].count('[2]')>=1:
-            list_time.append('14:00-16:00')
-        else:
-            list_time.append('09:00-11:00')
-        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
-    elif list_name[i].count('COMPUTER PROGRAMMING')>=1:
-        list_name.append('COMPUTER PROGRAMMING [Lab]')
-        list_day.append('Fri')
-        num += 1
-        if list_name[i].count('[1]')>=1:
-            list_time.append('09:00-11:00')
-        elif list_name[i].count('[2]')>=1:
-            list_time.append('12:00-14:00')
-        else:
-            list_time.append('14:00-16:00')
-        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
-    elif list_name[i].count('MULTIMEDIA AND WEB TECHNOLOGY')>=1:
-        list_name.append('MULTIMEDIA AND WEB TECHNOLOGY [Lab]')
-        list_day.append('Fri')
-        num += 1
-        if list_name[i].count('[1]')>=1:
-            list_time.append('12:00-14:00')
-        elif list_name[i].count('[2]')>=1:
-            list_time.append('14:00-16:00')
-        else:
-            list_time.append('09:00-11:00')
-        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
-    else:
-        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+        num = (len(aaa)/5)
+        for i in xrange(len(aaa)-3):
+            if i % 5==0:
+                list_name.append(aaa[i]+' (' +(aaa[i+3].translate(None, ' '))+', '+ aaa[i+4]+') ['+aaa[i+1]+']')
+                list_day.append(change_day[change_day.index(aaa[i+2][:aaa[i+2].index(' ')])+1])
+                list_time.append((aaa[i+2][aaa[i+2].index(' ')+1:len(aaa[i+2])-5]))
 
-#print list_name
-main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-main_time = ['0', '08:00', '08:30', '09:00', '09.30', '10.00'
-            , '10:30', '11:00', '11:30', '12:00', '12:30'
-            , '13:00', '13:30', '14:00', '14:30', '15:00'
-            , '15:30', '16:00', '16:30', '17:00', '17:30'
-            , '18:00', '18:30', '19:00', '19:30', '20:00']
-def main_table(sheet):
+        f.close()
+    print num
+    print list_name
+    print list_time
+    print list_day
+
+    for i in xrange(len(list_name)):
+
+        if list_name[i].count('INFORMATION TECHNOLOGY FUNDAMENTALS')>=1:
+            list_name.append('INFORMATION TECHNOLOGY FUNDAMENTALS [Lab]')
+            list_day.append('Thu')
+            num += 1
+            if list_name[i].count('[1]')>=1:
+                list_time.append('09:00-11:00')
+            elif list_name[i].count('[2]')>=1:
+                list_time.append('12:00-14:00')
+            else:
+                list_time.append('14:00-16:00')
+            list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+        elif list_name[i].count('PROBLEM SOLVING IN INFORMATION TECHNOLOGY')>=1:
+            list_name.append('PROBLEM SOLVING IN INFORMATION TECHNOLOGY [Lab]')
+            list_day.append('Thu')
+            num += 1
+            if list_name[i].count('[1]')>=1:
+                list_time.append('14:00-16:00')
+            elif list_name[i].count('[2]')>=1:
+                list_time.append('09:00-11:00')
+            else:
+                list_time.append('12:00-14:00')
+            list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+        elif list_name[i].count('INTRODUCTION TO COMPUTER SYSTEMS')>=1:
+            list_name.append('INTRODUCTION TO COMPUTER SYSTEMS [Lab]')
+            list_day.append('Thu')
+            num += 1
+            if list_name[i].count('[1]')>=1:
+                list_time.append('12:00-14:00')
+            elif list_name[i].count('[2]')>=1:
+                list_time.append('14:00-16:00')
+            else:
+                list_time.append('09:00-11:00')
+            list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+        elif list_name[i].count('COMPUTER PROGRAMMING')>=1:
+            list_name.append('COMPUTER PROGRAMMING [Lab]')
+            list_day.append('Fri')
+            num += 1
+            if list_name[i].count('[1]')>=1:
+                list_time.append('09:00-11:00')
+            elif list_name[i].count('[2]')>=1:
+                list_time.append('12:00-14:00')
+            else:
+                list_time.append('14:00-16:00')
+            list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+        elif list_name[i].count('MULTIMEDIA AND WEB TECHNOLOGY')>=1:
+            list_name.append('MULTIMEDIA AND WEB TECHNOLOGY [Lab]')
+            list_day.append('Fri')
+            num += 1
+            if list_name[i].count('[1]')>=1:
+                list_time.append('12:00-14:00')
+            elif list_name[i].count('[2]')>=1:
+                list_time.append('14:00-16:00')
+            else:
+                list_time.append('09:00-11:00')
+            list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+        else:
+            list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
+
+    #print list_name
+    main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+    main_time = ['0', '08:00', '08:30', '09:00', '09.30', '10.00'
+                , '10:30', '11:00', '11:30', '12:00', '12:30'
+                , '13:00', '13:30', '14:00', '14:30', '15:00'
+                , '15:30', '16:00', '16:30', '17:00', '17:30'
+                , '18:00', '18:30', '19:00', '19:30', '20:00']
+
     borders = Borders()
     borders.left = Borders.THICK
     borders.right = Borders.THICK
@@ -209,9 +215,7 @@ def main_table(sheet):
                     break
 
 
-book = Workbook(encoding='UTF-8')
-sheet = book.add_sheet('A Date')
 
-main_table(sheet)
-sheet.portrait = False
-book.save('date.xls')
+
+    sheet.portrait = False
+    book.save('date.xls')
