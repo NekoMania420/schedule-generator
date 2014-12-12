@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-# ssss
+# check color
 '''
 จำนวนวิชา
 เวลา(list)
