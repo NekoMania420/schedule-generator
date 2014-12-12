@@ -13,30 +13,31 @@ import random
 list_color= [0x21, 0x0B, 0x35, 0x11, 0x016, 0x012, 0x0D, 0x10, 0x17, 0x0C, 0x0F]
 fnt = Font()
 fnt.name = 'Arial'
-'''
-num = 8
-list_time = ['09:00-12:00', '13:00-15:00', '13:00-16:00', '09:00-11:00', '15:00-18:00', '09:00-12:00', '14:00-16:00', '09:00-11:00']
-list_day = ['Thu', 'Thu', 'Tue', 'Wed', 'Mon', 'Mon', 'Fri', 'Fri']
-list_name = ['MATHEMATICS FOR INFORMATION TECHNOLOGY'
-    , 'COMPUTER PROGRAMMING', 'COMPUTER SYSTEMS ORGANIZATION AND OPERATING SYSTEM'
-    , 'MULTIMEDIA AND WEB TECHNOLOGY', 'THAI GEOSOCIAL DESIGN'
-    , 'FOUNDATION ENGLISH 2', 'COMPUTER PROGRAMMING[Lab]', 'MULTIMEDIA AND WEB TECHNOLOGY[Lab]']
+list_name = []
+list_day=[]
+list_time=[]
+change_day = ['จ.', 'Mon', 'อ.', 'Tue', 'พ.' ,'Wed', 'พฤ.', 'Thu', 'ศ.', 'Fri']
+with open("filtered.txt", "r+") as f:
+    #for i in xrange()
+    #aaa = f.read().index('\n')
+    aaa = f.read().split('\n')
+    num = (len(aaa)/5)
+    for i in xrange(len(aaa)-3):
+        if i % 5==0:
+            list_name.append(aaa[i]+' (' +(aaa[i+3].translate(None, ' '))+', '+ aaa[i+4]+') ['+aaa[i+1]+']')
+            list_day.append(change_day[change_day.index(aaa[i+2][:aaa[i+2].index(' ')])+1])
+            list_time.append((aaa[i+2][aaa[i+2].index(' ')+1:len(aaa[i+2])-5]))
 
-
-6
-['09:00-12:00', '13:00-15:00', '13:00-16:00', '09:00-11:00', '15:00-18:00', '09:00-12:00']
-['Thu', 'Thu', 'Tue', 'Wed', 'Mon', 'Mon']
-['MATHEMATICS FOR INFORMATION TECHNOLOGY[3]', 'COMPUTER PROGRAMMING[3]', 'COMPUTER SYSTEMS ORGANIZATION AND OPERATING SYSTEM[3]', 'MULTIMEDIA AND WEB TECHNOLOGY[3]', 'THAI GEOSOCIAL DESIGN[3]', 'FOUNDATION ENGLISH 2[3]']
-'''
-num = input()
-list_time = input()
-list_day = input()
-list_name = input()
+    f.close()
+print num
+print list_name
+print list_time
+print list_day
 
 for i in xrange(len(list_name)):
 
     if list_name[i].count('INFORMATION TECHNOLOGY FUNDAMENTALS')>=1:
-        list_name.append('INFORMATION TECHNOLOGY FUNDAMENTALS')
+        list_name.append('INFORMATION TECHNOLOGY FUNDAMENTALS [Lab]')
         list_day.append('Thu')
         num += 1
         if list_name[i].count('[1]')>=1:
@@ -45,9 +46,9 @@ for i in xrange(len(list_name)):
             list_time.append('12:00-14:00')
         else:
             list_time.append('14:00-16:00')
-        list_name[i]=list_name[i][:len(list_name[i])-4]+'[Lab]'
+        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
     elif list_name[i].count('PROBLEM SOLVING IN INFORMATION TECHNOLOGY')>=1:
-        list_name.append('PROBLEM SOLVING IN INFORMATION TECHNOLOGY')
+        list_name.append('PROBLEM SOLVING IN INFORMATION TECHNOLOGY [Lab]')
         list_day.append('Thu')
         num += 1
         if list_name[i].count('[1]')>=1:
@@ -56,9 +57,9 @@ for i in xrange(len(list_name)):
             list_time.append('09:00-11:00')
         else:
             list_time.append('12:00-14:00')
-        list_name[i]=list_name[i][:len(list_name[i])-4]+'[Lab]'
+        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
     elif list_name[i].count('INTRODUCTION TO COMPUTER SYSTEMS')>=1:
-        list_name.append('INTRODUCTION TO COMPUTER SYSTEMS')
+        list_name.append('INTRODUCTION TO COMPUTER SYSTEMS [Lab]')
         list_day.append('Thu')
         num += 1
         if list_name[i].count('[1]')>=1:
@@ -67,9 +68,9 @@ for i in xrange(len(list_name)):
             list_time.append('14:00-16:00')
         else:
             list_time.append('09:00-11:00')
-        list_name[i]=list_name[i][:len(list_name[i])-4]+'[Lab]'
+        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
     elif list_name[i].count('COMPUTER PROGRAMMING')>=1:
-        list_name.append('COMPUTER PROGRAMMING')
+        list_name.append('COMPUTER PROGRAMMING [Lab]')
         list_day.append('Fri')
         num += 1
         if list_name[i].count('[1]')>=1:
@@ -78,9 +79,9 @@ for i in xrange(len(list_name)):
             list_time.append('12:00-14:00')
         else:
             list_time.append('14:00-16:00')
-        list_name[i]=list_name[i][:len(list_name[i])-4]+'[Lab]'
+        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
     elif list_name[i].count('MULTIMEDIA AND WEB TECHNOLOGY')>=1:
-        list_name.append('MULTIMEDIA AND WEB TECHNOLOGY')
+        list_name.append('MULTIMEDIA AND WEB TECHNOLOGY [Lab]')
         list_day.append('Fri')
         num += 1
         if list_name[i].count('[1]')>=1:
@@ -89,11 +90,11 @@ for i in xrange(len(list_name)):
             list_time.append('14:00-16:00')
         else:
             list_time.append('09:00-11:00')
-        list_name[i]=list_name[i][:len(list_name[i])-4]+'[Lab]'
+        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
     else:
-        list_name[i]=list_name[i][:len(list_name[i])-4]
+        list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
 
-
+#print list_name
 main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 main_time = ['0', '08:00', '08:30', '09:00', '09.30', '10.00'
             , '10:30', '11:00', '11:30', '12:00', '12:30'
@@ -155,6 +156,7 @@ def main_table(sheet):
     sheet.write_merge(1,1,21,22,'18.00-19.00', style)
     sheet.write_merge(1,1,23,24,'19.00-20.00', style)
     list_test=[]
+    print num
     for i in xrange(num):
         pattern2 = Pattern()
         pattern2.pattern = Pattern.SOLID_PATTERN
@@ -167,7 +169,7 @@ def main_table(sheet):
         style2.pattern = pattern2
         style2.alignment = alignment
         style2.borders = borders
-        #print 1
+        print 1
         sheet.write_merge(main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1,list_name[i], style2)
         list_test.append([main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1])
     #print sorted(list_test)
