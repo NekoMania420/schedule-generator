@@ -10,6 +10,7 @@
 #from datetime import date
 from xlwt import *
 import random
+import tkFileDialog
 
 def gen():
 
@@ -215,7 +216,5 @@ def gen():
                     break
 
 
-
-
     sheet.portrait = False
-    book.save('date.xls')
+    book.save('Schedule.xls')
