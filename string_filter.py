@@ -4,7 +4,10 @@
 from bs4 import BeautifulSoup
 import codecs
 
+
 def string_filter(html):
+    """Filter HTML code to use with gen.py."""
+
     item_list = []
 
     soup = BeautifulSoup(html.read())
