@@ -179,6 +179,7 @@ def main_table(sheet):
     style3.pattern = pattern3
     style3.alignment = alignment
     style3.borders = borders
+    '''
     i=0
     for j in xrange(2, 7):
         cou = 1
@@ -206,7 +207,7 @@ def main_table(sheet):
                         sheet.write_merge(j,j,m,m+1,'', style3)
                     break
 
-
+    '''
 book = Workbook(encoding='UTF-8')
 sheet = book.add_sheet('A Date')
 
