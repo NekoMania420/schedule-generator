@@ -8,6 +8,9 @@
 ชื่อวิชา+ตึก+ห้อง(list)
 '''
 #from datetime import date
+import sys
+sys.path.append("xlwt")
+
 from xlwt import *
 import random
 import tkFileDialog

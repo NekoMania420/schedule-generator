@@ -12,11 +12,14 @@ App by:
 	King Mongkut's Institute of Technology Ladkrabang
 """
 
+import sys
+sys.path.append("bs4")
+sys.path.append("mechanize")
+
 from Tkinter import *
 import tkMessageBox
 import tkFont
 import mechanize
-import getpass
 import time
 from bs4 import BeautifulSoup
 
