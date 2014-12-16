@@ -191,6 +191,7 @@ def gen():
     style3.pattern = pattern3
     style3.alignment = alignment
     style3.borders = borders
+    '''
     i=0
     for j in xrange(2, 7):
         cou = 1
@@ -218,6 +219,6 @@ def gen():
                         sheet.write_merge(j,j,m,m+1,'', style3)
                     break
 
-
+    '''
     sheet.portrait = False
     book.save('Schedule.xls')
