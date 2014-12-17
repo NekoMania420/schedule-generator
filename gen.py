@@ -14,6 +14,7 @@ sys.path.append("xlwt")
 from xlwt import *
 import random
 import tkFileDialog
+import os
 
 def gen():
 
@@ -125,8 +126,8 @@ def gen():
     color = pattern.pattern_fore_colour, '+'
 
 
-    print color
-    print type(color)
+    #print color
+    #print type(color)
     #pattern.easyxf("align: horiz center")
     first_col = sheet.col(0)
     first_col.width = 256 * 6
@@ -179,7 +180,6 @@ def gen():
             pattern2.pattern_fore_colour = random.choice(list_color)
             if color.count(pattern2.pattern_fore_colour)== 0:
                 color += pattern2.pattern_fore_colour , '+'
-                print color
                 break
         style2 = XFStyle()
         style2.pattern = pattern2
@@ -230,7 +230,8 @@ def gen():
                     cou = list_test[i][3]+1
                 i+=1
         i+=1
-
+    #remove file
     sheet.portrait = False
     book.save('Schedule.xls')
-gen()
+    os.remove('data.html')
+    os.remove('filtered.txt')
