@@ -14,12 +14,13 @@ sys.path.append("xlwt")
 from xlwt import *
 import random
 import tkFileDialog
+import os
 
 def gen():
 
     book = Workbook(encoding='UTF-8')
     sheet = book.add_sheet('A Date')
-    list_color= [0x21, 0x0B, 0x35, 0x11, 0x016, 0x012, 0x0D, 0x10, 0x17, 0x0C, 0x0F]
+    list_color= [0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17]
     fnt = Font()
     fnt.name = 'Arial'
     list_name = []
@@ -122,7 +123,11 @@ def gen():
     pattern.pattern = Pattern.SOLID_PATTERN
     pattern.pattern_fore_colour = random.choice(list_color)
     #print pattern.pattern_fore_colour
-    color = pattern.pattern_fore_colour , '+'
+    color = pattern.pattern_fore_colour, '+'
+
+
+    #print color
+    #print type(color)
     #pattern.easyxf("align: horiz center")
     first_col = sheet.col(0)
     first_col.width = 256 * 6
@@ -174,7 +179,7 @@ def gen():
         while True:
             pattern2.pattern_fore_colour = random.choice(list_color)
             if color.count(pattern2.pattern_fore_colour)== 0:
-                color = pattern2.pattern_fore_colour , '+'
+                color += pattern2.pattern_fore_colour , '+'
                 break
         style2 = XFStyle()
         style2.pattern = pattern2
@@ -225,6 +230,8 @@ def gen():
                     cou = list_test[i][3]+1
                 i+=1
         i+=1
-
+    #remove file
     sheet.portrait = False
     book.save('Schedule.xls')
+    os.remove('data.html')
+    os.remove('filtered.txt')
