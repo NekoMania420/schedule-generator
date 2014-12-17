@@ -79,7 +79,7 @@ class RequestRegistra(object):
 
         gen.gen()
 
-        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s.\n\nOpen 'Schedule.xls' to see schedule table." % \
+        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s.\n\nOpen 'Schedule.xls' to see schedule table.\n\nPlease use 'LibreOffice Calc' to open file." % \
             (time.time()-self.start_time))
 
 
