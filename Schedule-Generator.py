@@ -185,10 +185,10 @@ class MainWindow(object):
         req.passwd = self.passwd_input.get()
         req.year = self.year_input.get()
         req.semester = self.semester_input.get()
-        #try:
-        req.request_data()
-        #except:
-        #    tkMessageBox.showerror("Not found!", "Please check your username and password and try again.")
+        try:
+            req.request_data()
+        except:
+            tkMessageBox.showerror("Not found!", "Please check your username and password and try again.")
 
     def quit(self, event):
         """Quit program."""
