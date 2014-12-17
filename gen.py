@@ -192,20 +192,7 @@ def gen():
     style3.pattern = pattern3
     style3.alignment = alignment
     style3.borders = borders
-    '''
-    borders2 = Borders()
-    borders2.left = Borders.THICK
-    pattern4 = Pattern()
-    pattern4.pattern = Pattern.SOLID_PATTERN
-    pattern4.pattern_fore_colour = 0x09
-    style4 = XFStyle()
-    style4.pattern = pattern3
-    style4.alignment = alignment
-    style4.borders = borders2
-    '''
 
-    #for i in xrange(2, 7):
-    #    list_test.append([i, i, , ])
     i=0
     for j in xrange(2, 7):
         cou = 1
@@ -222,47 +209,19 @@ def gen():
                 sheet.write_merge(j,j,cou,cou+1,'', style3)
                 cou += 2
             elif list_test[i][2] >= cou+1:
-                #sheet.write_merge(j,j,cou,cou,'', style3)
+                sheet.write_merge(j,j,cou,cou,'', style3)
                 cou += 1
             else:
                 if list_test[i][3] % 2 != 0:
-                    cou = list_test[i][3]+1 
+                    cou = list_test[i][3]+1
                     #sheet.write_merge(j,j,cou,cou,'', style3)
-                    cou +=1  
+                    cou +=1
                 else:
                     cou = list_test[i][3]+1
                 i+=1
         i+=1
+    #sheet.write_merge(3,3,24,24,'', style3)
 
-    '''
-    i=0
-    for j in xrange(2, 7):
-        cou = 1
-
-        while True:
-
-            if cou > 24:
-                break
-            if list_test[i][0] != j:
-                break
-            if list_test[i][2] >= cou+2:
-                sheet.write_merge(j,j,cou,cou+1,'', style3)
-
-                cou += 2
-            else:
-                cou = list_test[i][3]+1
-                i+=1
-                if i >= len(list_test):
-                    
-                    for m in xrange(cou, 24, 2):
-                        sheet.write_merge(j,j,m,m+1,'', style3)
-                    break
-                if list_test[i][0] != j:
-                    for m in xrange(cou, 24, 2):
-                        sheet.write_merge(j,j,m,m+1,'', style3)
-                    break
-
-    '''
     sheet.portrait = False
     book.save('Schedule.xls')
-#gen()
+gen()
