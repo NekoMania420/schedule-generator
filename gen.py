@@ -7,7 +7,7 @@
 วัน(list)
 ชื่อวิชา+ตึก+ห้อง(list)
 '''
-#from datetime import date
+
 import sys
 sys.path.append("xlwt")
 
@@ -26,9 +26,13 @@ def gen():
     list_day=[]
     list_time=[]
     change_day = ['จ.', 'Mon', 'อ.', 'Tue', 'พ.' ,'Wed', 'พฤ.', 'Thu', 'ศ.', 'Fri']
+    #change Th->Eng
     with open("filtered.txt", "r+") as f:
-        #for i in xrange()
-        #aaa = f.read().index('\n')
+        #openfile filtered
+        #make num
+        #make list_name
+        #make list_time
+        #make list_day
         aaa = f.read().split('\n')
 
         num = (len(aaa)/5)
@@ -39,10 +43,6 @@ def gen():
                 list_time.append((aaa[i+2][aaa[i+2].index(' ')+1:len(aaa[i+2])-5]))
 
         f.close()
-    print num
-    print list_name
-    print list_time
-    print list_day
 
     for i in xrange(len(list_name)):
 
