@@ -45,7 +45,7 @@ def gen():
         f.close()
 
     for i in xrange(len(list_name)):
-
+    #fix bug lab
         if list_name[i].count('INFORMATION TECHNOLOGY FUNDAMENTALS')>=1:
             list_name.append('INFORMATION TECHNOLOGY FUNDAMENTALS [Lab]')
             list_day.append('Thu')
@@ -104,7 +104,7 @@ def gen():
         else:
             list_name[i]=list_name[i][:len(list_name[i])-(list_name[i].index(']')-list_name[i].index('[')+1)]
 
-    #print list_name
+    #make list_main
     main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
     main_time = ['0', '08:00', '08:30', '09:00', '09:30', '10:00'
                 , '10:30', '11:00', '11:30', '12:00', '12:30'
@@ -117,7 +117,7 @@ def gen():
     borders.right = Borders.THICK
     borders.top = Borders.THICK
     borders.bottom = Borders.THICK
-
+    #set border
     pattern = Pattern()
     pattern.pattern = Pattern.SOLID_PATTERN
     pattern.pattern_fore_colour = random.choice(list_color)
@@ -126,18 +126,19 @@ def gen():
     #pattern.easyxf("align: horiz center")
     first_col = sheet.col(0)
     first_col.width = 256 * 6
+    #set str = 6 character
     for i in xrange(1, 25):
         first_col = sheet.col(i)
         first_col.width = 256 * 5
         if i <= 6:
             first_row = sheet.row(i)
-            #first_row.height_mismatch = True
+
             first_row.height = 256 * 5
 
     alignment = Alignment()
     alignment.horz = Alignment.HORZ_CENTER
     alignment.vert = Alignment.VERT_CENTER
-
+    #set center caracter
 
     style = XFStyle()
     style.borders = borders
@@ -145,7 +146,7 @@ def gen():
     style.alignment = alignment
     style.alignment.wrap = 1
 
-    #print sheet.col(0)
+    #print main
     sheet.write(1,0,'', style)
     sheet.write(2,0,'Mon', style)
     sheet.write(3,0,'Tue', style)
@@ -166,7 +167,7 @@ def gen():
     sheet.write_merge(1,1,21,22,'18.00-19.00', style)
     sheet.write_merge(1,1,23,24,'19.00-20.00', style)
     list_test=[]
-    print num
+    #print schedule
     for i in xrange(num):
         pattern2 = Pattern()
         pattern2.pattern = Pattern.SOLID_PATTERN
