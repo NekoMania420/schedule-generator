@@ -195,8 +195,10 @@ def gen():
     style3.borders = borders
     #find blank cell
     i=0
+    #i=count_list_test
     for j in xrange(2, 7):
         cou = 1
+        #cou=count_cell in row
         list_test.append([j, j, 25, 26])
         list_test = sorted(list_test)
         #sheet.write_merge(j,j,25,26,'', style4)
