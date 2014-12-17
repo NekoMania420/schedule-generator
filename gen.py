@@ -229,4 +229,3 @@ def gen():
 
     sheet.portrait = False
     book.save('Schedule.xls')
-gen()
