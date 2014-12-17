@@ -3,7 +3,7 @@
 
 """
 Project: Schedule.GEN
-Version: 0.03
+Version: 0.1
 App by:
     Suchaj Jongprasit (57070132)
     Seksan Neramitthanasombat (57070137)
@@ -13,7 +13,6 @@ App by:
 """
 
 import sys
-sys.path.append("bs4")
 sys.path.append("mechanize")
 
 from Tkinter import *
@@ -21,8 +20,6 @@ import tkMessageBox
 import tkFont
 import mechanize
 import time
-from bs4 import BeautifulSoup
-
 
 class RequestRegistra(object):
 
@@ -56,8 +53,8 @@ class RequestRegistra(object):
                 br["semester"] = [self.semester]
                 response = br.submit()
 
-                soup = BeautifulSoup(response.get_data())
-                response.set_data(soup.prettify("utf-8"))
+                #soup = BeautifulSoup(response.get_data())
+                #response.set_data(soup.prettify("utf-8"))
 
                 self.write_to_file(response.get_data())
 
@@ -226,7 +223,7 @@ class About(Tk):
             fg="#fff").pack()
         Label(window_frame, text="Generate schedule table from KMITL Registra",\
             bg="#111", fg="#fff").pack()
-        Label(window_frame, text="Version 0.03", bg="#111", \
+        Label(window_frame, text="Version 0.1", bg="#111", \
             fg="#fff").pack(pady=(20, 0))
 
         author_frame = Label(window_frame)
