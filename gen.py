@@ -183,9 +183,9 @@ def gen():
         print 1
         sheet.write_merge(main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1,list_name[i], style2)
         list_test.append([main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1])
-    #print sorted(list_test)
+    #sorted(list_test) -> find blank cell
     list_test = sorted(list_test)
-    print list_test
+    #set blank cell
     pattern3 = Pattern()
     pattern3.pattern = Pattern.SOLID_PATTERN
     pattern3.pattern_fore_colour = 0x09
@@ -193,7 +193,7 @@ def gen():
     style3.pattern = pattern3
     style3.alignment = alignment
     style3.borders = borders
-
+    #find blank cell
     i=0
     for j in xrange(2, 7):
         cou = 1
@@ -207,9 +207,11 @@ def gen():
             if list_test[i][0] != j:
                 break
             if list_test[i][2] >= cou+2:
+                #write blank cell
                 sheet.write_merge(j,j,cou,cou+1,'', style3)
                 cou += 2
             elif list_test[i][2] >= cou+1:
+                #write blank cell
                 sheet.write_merge(j,j,cou,cou,'', style3)
                 cou += 1
             else:
