@@ -198,11 +198,7 @@ def gen():
     style3.pattern = pattern3
     style3.alignment = alignment
     style3.borders = borders
-<<<<<<< HEAD
-    '''
-=======
     #find blank cell
->>>>>>> col_check
     i=0
     #i=count_list_test
     for j in xrange(2, 7):
@@ -233,29 +229,9 @@ def gen():
                 else:
                     cou = list_test[i][3]+1
                 i+=1
-<<<<<<< HEAD
-                if i >= len(list_test):
-                    
-                    for m in xrange(cou, 24, 2):
-                        sheet.write_merge(j,j,m,m+1,'', style3)
-                    break
-                if list_test[i][0] != j:
-                    for m in xrange(cou, 24, 2):
-                        sheet.write_merge(j,j,m,m+1,'', style3)
-                    break
-
-    '''
-book = Workbook(encoding='UTF-8')
-sheet = book.add_sheet('A Date')
-
-main_table(sheet)
-sheet.portrait = False
-book.save('date.xls')
-=======
         i+=1
     #remove file
     sheet.portrait = False
     book.save('Schedule.xls')
     os.remove('data.html')
     os.remove('filtered.txt')
->>>>>>> col_check
