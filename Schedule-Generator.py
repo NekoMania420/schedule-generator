@@ -192,17 +192,19 @@ class MainWindow(object):
         HowToUse().mainloop()
 
 
-class About(Tk):
+class About(Toplevel):
 
     def __init__(self):
         """Initial function."""
 
-        Tk.__init__(self)
+        Toplevel.__init__(self)
 
         self.title("About")
         self.geometry("400x300")
         self.resizable(0, 0)
         self.config(bg="#111")
+        self.grab_set()
+        self.focus()
 
         window_frame = Frame(self)
         window_frame.pack(expand=1)
@@ -233,17 +235,19 @@ class About(Tk):
         License().mainloop()
 
 
-class HowToUse(Tk):
+class HowToUse(Toplevel):
 
     def __init__(self):
         """Initial function."""
 
-        Tk.__init__(self)
+        Toplevel.__init__(self)
 
         self.title("How to use?")
         self.geometry("300x100")
         self.resizable(0, 0)
         self.config(bg="#111")
+        self.grab_set()
+        self.focus()
 
         label_frame = Frame(self)
         label_frame.pack(expand=1)
@@ -255,14 +259,16 @@ class HowToUse(Tk):
         Button(label_frame, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack()
 
 
-class License(Tk):
+class License(Toplevel):
 
     def __init__(self):
         """Initial function."""
 
-        Tk.__init__(self)
+        Toplevel.__init__(self)
 
         self.title("License")
+        self.grab_set()
+        self.focus()
 
         string = open("LICENSE", "r").read()
 
