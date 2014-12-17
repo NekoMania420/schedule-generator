@@ -106,7 +106,7 @@ def gen():
 
     #print list_name
     main_day = ['0', '1', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-    main_time = ['0', '08:00', '08:30', '09:00', '09.30', '10.00'
+    main_time = ['0', '08:00', '08:30', '09:00', '09:30', '10:00'
                 , '10:30', '11:00', '11:30', '12:00', '12:30'
                 , '13:00', '13:30', '14:00', '14:30', '15:00'
                 , '15:30', '16:00', '16:30', '17:00', '17:30'
@@ -184,6 +184,7 @@ def gen():
         list_test.append([main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1])
     #print sorted(list_test)
     list_test = sorted(list_test)
+    print list_test
     pattern3 = Pattern()
     pattern3.pattern = Pattern.SOLID_PATTERN
     pattern3.pattern_fore_colour = 0x09
@@ -192,13 +193,55 @@ def gen():
     style3.alignment = alignment
     style3.borders = borders
     '''
+    borders2 = Borders()
+    borders2.left = Borders.THICK
+    pattern4 = Pattern()
+    pattern4.pattern = Pattern.SOLID_PATTERN
+    pattern4.pattern_fore_colour = 0x09
+    style4 = XFStyle()
+    style4.pattern = pattern3
+    style4.alignment = alignment
+    style4.borders = borders2
+    '''
+
+    #for i in xrange(2, 7):
+    #    list_test.append([i, i, , ])
+    i=0
+    for j in xrange(2, 7):
+        cou = 1
+        list_test.append([j, j, 25, 26])
+        list_test = sorted(list_test)
+        #sheet.write_merge(j,j,25,26,'', style4)
+        while True:
+
+            if cou > 24:
+                break
+            if list_test[i][0] != j:
+                break
+            if list_test[i][2] >= cou+2:
+                sheet.write_merge(j,j,cou,cou+1,'', style3)
+                cou += 2
+            elif list_test[i][2] >= cou+1:
+                #sheet.write_merge(j,j,cou,cou,'', style3)
+                cou += 1
+            else:
+                if list_test[i][3] % 2 != 0:
+                    cou = list_test[i][3]+1 
+                    #sheet.write_merge(j,j,cou,cou,'', style3)
+                    cou +=1  
+                else:
+                    cou = list_test[i][3]+1
+                i+=1
+        i+=1
+
+    '''
     i=0
     for j in xrange(2, 7):
         cou = 1
 
         while True:
 
-            if cou>24:
+            if cou > 24:
                 break
             if list_test[i][0] != j:
                 break
@@ -222,3 +265,4 @@ def gen():
     '''
     sheet.portrait = False
     book.save('Schedule.xls')
+#gen()
