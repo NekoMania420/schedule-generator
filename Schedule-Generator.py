@@ -79,8 +79,7 @@ class RequestRegistra(object):
 
         gen.gen()
 
-        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s.\n\nOpen 'Schedule.xls' to see schedule table.\n\nPlease use 'LibreOffice Calc' to open file." % \
-            (time.time()-self.start_time))
+        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s.\n\nOpen 'Schedule.xls' to see schedule table.\n\nPlease use 'LibreOffice Calc' to open file." % (time.time()-self.start_time))
 
 
 class MainWindow(object):
@@ -97,16 +96,13 @@ class MainWindow(object):
         menubar = Menu(master)
 
         filemenu = Menu(menubar, tearoff=False)
-        filemenu.add_command(label="Quit", command=quit, underline=0, \
-            accelerator="Ctrl+Q")
+        filemenu.add_command(label="Quit", command=quit, underline=0, accelerator="Ctrl+Q")
         menubar.add_cascade(label="File", menu=filemenu, underline=0)
 
         helpmenu = Menu(menubar, tearoff=False)
-        helpmenu.add_command(label="How to use?", command=self.how_to_use, \
-            underline=0)
+        helpmenu.add_command(label="How to use?", command=self.how_to_use, underline=0)
         helpmenu.add_separator()
-        helpmenu.add_command(label="About...", command=self.call_about, \
-            underline=0)
+        helpmenu.add_command(label="About...", command=self.call_about, underline=0)
         menubar.add_cascade(label="Help", menu=helpmenu, underline=0)
 
         master.config(menu=menubar)
@@ -149,27 +145,20 @@ class MainWindow(object):
 
         # Element configuration
         master.config(bg="#111")
-        menubar.config(bg="#111", fg="#fff", activebackground="#fff", \
-            borderwidth=0)
-        filemenu.config(bg="#111", fg="#fff", activebackground="#fff", \
-            activeforeground="#111")
-        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff", \
-            activeforeground="#111")
+        menubar.config(bg="#111", fg="#fff", activebackground="#fff", borderwidth=0)
+        filemenu.config(bg="#111", fg="#fff", activebackground="#fff", activeforeground="#111")
+        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff", activeforeground="#111")
         self.header.config(bg="#111", fg="#fff")
         self.username_label.config(bg="#111", fg="#fff")
-        self.username_input.config(bg="#111", fg="#fff", \
-            insertbackground="#fff")
+        self.username_input.config(bg="#111", fg="#fff", insertbackground="#fff")
         self.passwd_label.config(bg="#111", fg="#fff")
         self.passwd_input.config(bg="#111", fg="#fff", insertbackground="#fff")
         option_area.config(bg="#111")
         self.year_label.config(bg="#111", fg="#fff")
         self.year_input.config(bg="#111", fg="#fff", insertbackground="#fff")
         self.semester_label.config(bg="#111", fg="#fff")
-        self.semester_input.config(bg="#111", fg="#fff", \
-            insertbackground="#fff")
-        self.submit_button.config(bg="#111", fg="#fff", \
-            activebackground="#111", activeforeground="#fff", \
-            height=2, width=10)
+        self.semester_input.config(bg="#111", fg="#fff", insertbackground="#fff")
+        self.submit_button.config(bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff", height=2, width=10)
 
         for col in xrange(2):
             master.grid_columnconfigure(col, weight=1)
@@ -219,34 +208,24 @@ class About(Tk):
         window_frame.pack(expand=1)
         window_frame.config(bg="#111")
 
-        Label(window_frame, text="Schedule.GEN", font="None 20", bg="#111", \
-            fg="#fff").pack()
-        Label(window_frame, text="Generate schedule table from KMITL Registra",\
-            bg="#111", fg="#fff").pack()
-        Label(window_frame, text="Version 0.1", bg="#111", \
-            fg="#fff").pack(pady=(20, 0))
+        Label(window_frame, text="Schedule.GEN", font="None 20", bg="#111", fg="#fff").pack()
+        Label(window_frame, text="Generate schedule table from KMITL Registra",bg="#111", fg="#fff").pack()
+        Label(window_frame, text="Version 0.1", bg="#111", fg="#fff").pack(pady=(20, 0))
 
         author_frame = Label(window_frame)
         author_frame.pack(pady=(20, 0))
         author_frame.config(bg="#111")
 
-        Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold"), \
-            bg="#111", fg="#fff").pack()
-        Label(author_frame, text="Suchaj Jongprasit (57070132)", bg="#111", \
-            fg="#fff").pack()
-        Label(author_frame, text="Seksan Neramitthanasombat (57070137)", \
-            bg="#111", fg="#fff").pack()
+        Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold"), bg="#111", fg="#fff").pack()
+        Label(author_frame, text="Suchaj Jongprasit (57070132)", bg="#111", fg="#fff").pack()
+        Label(author_frame, text="Seksan Neramitthanasombat (57070137)", bg="#111", fg="#fff").pack()
 
         button_area = Frame(window_frame)
         button_area.pack(pady=10)
         button_area.config(bg="#111")
 
-        Button(button_area, text="License", command=self.call_license, \
-            bg="#111", fg="#fff", activebackground="#111", \
-            activeforeground="#fff").pack(side=LEFT)
-        Button(button_area, text="Close", command=self.destroy, bg="#111", \
-            fg="#fff", activebackground="#111", \
-            activeforeground="#fff").pack(side=LEFT)
+        Button(button_area, text="License", command=self.call_license, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack(side=LEFT)
+        Button(button_area, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack(side=LEFT)
 
     def call_license(self):
         """Open 'License' window."""
@@ -270,13 +249,10 @@ class HowToUse(Tk):
         label_frame.pack(expand=1)
         label_frame.config(bg="#111")
 
-        Label(label_frame, text="1. Input your username and password", \
-            bg="#111", fg="#fff").pack(anchor=W)
-        Label(label_frame, text="2. Press 'Get!' button", bg="#111", \
-            fg="#fff").pack(anchor=W)
+        Label(label_frame, text="1. Input your username and password", bg="#111", fg="#fff").pack(anchor=W)
+        Label(label_frame, text="2. Press 'Get!' button", bg="#111", fg="#fff").pack(anchor=W)
 
-        Button(label_frame, text="Close", command=self.destroy, bg="#111", \
-            fg="#fff", activebackground="#111", activeforeground="#fff").pack()
+        Button(label_frame, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack()
 
 
 class License(Tk):
