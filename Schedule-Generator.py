@@ -3,21 +3,25 @@
 
 """
 Project: Schedule.GEN
-Version: 0.01
+Version: 0.03
 App by:
     Suchaj Jongprasit (57070132)
     Seksan Neramitthanasombat (57070137)
-IT@KMITL
+
+    Faculty of Information Technology
+    King Mongkut's Institute of Technology Ladkrabang
 """
+
+import sys
+sys.path.append("bs4")
+sys.path.append("mechanize")
 
 from Tkinter import *
 import tkMessageBox
 import tkFont
 import mechanize
-import getpass
 import time
 from bs4 import BeautifulSoup
-import string_filter
 
 
 class RequestRegistra(object):
@@ -48,8 +52,6 @@ class RequestRegistra(object):
                 tkMessageBox.showerror("Login error", "Please complete fill year and semester.")
             else:
                 br.select_form("edit")
-                #self.year = br.possible_items('year')
-                #self.semester = br.possible_items('semester')
                 br["year"] = [self.year]
                 br["semester"] = [self.semester]
                 response = br.submit()
@@ -62,17 +64,26 @@ class RequestRegistra(object):
                 self.export_string()
 
     def write_to_file(self, data):
-        """Write data to file"""
+        """Write data to file."""
 
         with open("data.html", "w") as f:
             f.write(data)
             f.close()
 
-        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s." % (time.time()-self.start_time))
-
     def export_string(self):
+        """Export HTML code to custom modules."""
+
+        import string_filter
+        
         with open("data.html", "r") as f:
             string_filter.string_filter(f)
+
+        import gen
+
+        gen.gen()
+
+        tkMessageBox.showinfo("Done!", "Generate complete!\nTime: %.3f s.\n\nOpen 'Schedule.xls' to see schedule table." % \
+            (time.time()-self.start_time))
 
 
 class MainWindow(object):
@@ -89,13 +100,16 @@ class MainWindow(object):
         menubar = Menu(master)
 
         filemenu = Menu(menubar, tearoff=False)
-        filemenu.add_command(label="Quit", command=quit, underline=0, accelerator="Ctrl+Q")
+        filemenu.add_command(label="Quit", command=quit, underline=0, \
+            accelerator="Ctrl+Q")
         menubar.add_cascade(label="File", menu=filemenu, underline=0)
 
         helpmenu = Menu(menubar, tearoff=False)
-        helpmenu.add_command(label="How to use?", command=self.how_to_use, underline=0)
+        helpmenu.add_command(label="How to use?", command=self.how_to_use, \
+            underline=0)
         helpmenu.add_separator()
-        helpmenu.add_command(label="About...", command=self.call_about, underline=0)
+        helpmenu.add_command(label="About...", command=self.call_about, \
+            underline=0)
         menubar.add_cascade(label="Help", menu=helpmenu, underline=0)
 
         master.config(menu=menubar)
@@ -138,45 +152,65 @@ class MainWindow(object):
 
         # Element configuration
         master.config(bg="#111")
-        menubar.config(bg="#111", fg="#fff", activebackground="#fff", borderwidth=0)
-        filemenu.config(bg="#111", fg="#fff", activebackground="#fff")
-        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff")
+        menubar.config(bg="#111", fg="#fff", activebackground="#fff", \
+            borderwidth=0)
+        filemenu.config(bg="#111", fg="#fff", activebackground="#fff", \
+            activeforeground="#111")
+        helpmenu.config(bg="#111", fg="#fff", activebackground="#fff", \
+            activeforeground="#111")
         self.header.config(bg="#111", fg="#fff")
         self.username_label.config(bg="#111", fg="#fff")
-        self.username_input.config(bg="#111", fg="#fff", insertbackground="#fff")
+        self.username_input.config(bg="#111", fg="#fff", \
+            insertbackground="#fff")
         self.passwd_label.config(bg="#111", fg="#fff")
         self.passwd_input.config(bg="#111", fg="#fff", insertbackground="#fff")
         option_area.config(bg="#111")
         self.year_label.config(bg="#111", fg="#fff")
         self.year_input.config(bg="#111", fg="#fff", insertbackground="#fff")
         self.semester_label.config(bg="#111", fg="#fff")
-        self.semester_input.config(bg="#111", fg="#fff", insertbackground="#fff")
-        self.submit_button.config(bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff", height=2, width=10)
+        self.semester_input.config(bg="#111", fg="#fff", \
+            insertbackground="#fff")
+        self.submit_button.config(bg="#111", fg="#fff", \
+            activebackground="#111", activeforeground="#fff", \
+            height=2, width=10)
 
         for col in xrange(2):
             master.grid_columnconfigure(col, weight=1)
 
     def send_data(self):
+        """Call RequestRegistra() to request data."""
+
         req = RequestRegistra()
         req.username = self.username_input.get()
         req.passwd = self.passwd_input.get()
         req.year = self.year_input.get()
         req.semester = self.semester_input.get()
-        req.request_data()
+        try:
+            req.request_data()
+        except:
+            tkMessageBox.showerror("Not found!", "Please check your username and password and try again.")
 
     def quit(self, event):
+        """Quit program."""
+
         root.destroy()
 
     def call_about(self):
+        """Open 'About' window."""
+
         About().mainloop()
 
     def how_to_use(self):
+        """Open 'How to use?' window."""
+
         HowToUse().mainloop()
 
 
 class About(Tk):
 
     def __init__(self):
+        """Initial function."""
+
         Tk.__init__(self)
 
         self.title("About")
@@ -188,32 +222,46 @@ class About(Tk):
         window_frame.pack(expand=1)
         window_frame.config(bg="#111")
 
-        Label(window_frame, text="Schedule.GEN", font="None 20", bg="#111", fg="#fff").pack()
-        Label(window_frame, text="Generate schedule table from KMITL Registra", bg="#111", fg="#fff").pack()
-        Label(window_frame, text="Version 0.01", bg="#111", fg="#fff").pack(pady=(20, 0))
+        Label(window_frame, text="Schedule.GEN", font="None 20", bg="#111", \
+            fg="#fff").pack()
+        Label(window_frame, text="Generate schedule table from KMITL Registra",\
+            bg="#111", fg="#fff").pack()
+        Label(window_frame, text="Version 0.03", bg="#111", \
+            fg="#fff").pack(pady=(20, 0))
 
         author_frame = Label(window_frame)
         author_frame.pack(pady=(20, 0))
         author_frame.config(bg="#111")
 
-        Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold"), bg="#111", fg="#fff").pack()
-        Label(author_frame, text="Suchaj Jongprasit (57070132)", bg="#111", fg="#fff").pack()
-        Label(author_frame, text="Seksan Neramitthanasombat (57070137)", bg="#111", fg="#fff").pack()
+        Label(author_frame, text="Creators:", font=tkFont.Font(weight="bold"), \
+            bg="#111", fg="#fff").pack()
+        Label(author_frame, text="Suchaj Jongprasit (57070132)", bg="#111", \
+            fg="#fff").pack()
+        Label(author_frame, text="Seksan Neramitthanasombat (57070137)", \
+            bg="#111", fg="#fff").pack()
 
         button_area = Frame(window_frame)
         button_area.pack(pady=10)
         button_area.config(bg="#111")
 
-        Button(button_area, text="License", command=self.call_license, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack(side=LEFT)
-        Button(button_area, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack(side=LEFT)
+        Button(button_area, text="License", command=self.call_license, \
+            bg="#111", fg="#fff", activebackground="#111", \
+            activeforeground="#fff").pack(side=LEFT)
+        Button(button_area, text="Close", command=self.destroy, bg="#111", \
+            fg="#fff", activebackground="#111", \
+            activeforeground="#fff").pack(side=LEFT)
 
     def call_license(self):
+        """Open 'License' window."""
+
         License().mainloop()
 
 
 class HowToUse(Tk):
 
     def __init__(self):
+        """Initial function."""
+
         Tk.__init__(self)
 
         self.title("How to use?")
@@ -225,15 +273,20 @@ class HowToUse(Tk):
         label_frame.pack(expand=1)
         label_frame.config(bg="#111")
 
-        Label(label_frame, text="1. Input your username and password", bg="#111", fg="#fff").pack(anchor=W)
-        Label(label_frame, text="2. Press 'Get!' button", bg="#111", fg="#fff").pack(anchor=W)
+        Label(label_frame, text="1. Input your username and password", \
+            bg="#111", fg="#fff").pack(anchor=W)
+        Label(label_frame, text="2. Press 'Get!' button", bg="#111", \
+            fg="#fff").pack(anchor=W)
 
-        Button(label_frame, text="Close", command=self.destroy, bg="#111", fg="#fff", activebackground="#111", activeforeground="#fff").pack()
+        Button(label_frame, text="Close", command=self.destroy, bg="#111", \
+            fg="#fff", activebackground="#111", activeforeground="#fff").pack()
 
 
 class License(Tk):
 
     def __init__(self):
+        """Initial function."""
+
         Tk.__init__(self)
 
         self.title("License")

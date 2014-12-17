@@ -4,7 +4,10 @@
 from bs4 import BeautifulSoup
 import codecs
 
+
 def string_filter(html):
+    """Filter HTML code to use with gen.py."""
+
     item_list = []
 
     soup = BeautifulSoup(html.read())
@@ -14,7 +17,7 @@ def string_filter(html):
 
     with codecs.open("filtered.txt", "w", "utf-8-sig") as f:
         for i, each in enumerate(item_list):
-            if i%8 in [2, 5, 6, 7]:
+            if i%8 in [2, 4, 5, 6, 7]:
                 f.write("%s\n" % each)
 
         f.close()
