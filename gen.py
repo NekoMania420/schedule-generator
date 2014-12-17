@@ -121,7 +121,7 @@ def gen():
     pattern = Pattern()
     pattern.pattern = Pattern.SOLID_PATTERN
     pattern.pattern_fore_colour = random.choice(list_color)
-    print pattern.pattern_fore_colour
+    #print pattern.pattern_fore_colour
     color = pattern.pattern_fore_colour , '+'
     #pattern.easyxf("align: horiz center")
     first_col = sheet.col(0)
@@ -180,7 +180,7 @@ def gen():
         style2.pattern = pattern2
         style2.alignment = alignment
         style2.borders = borders
-        print 1
+
         sheet.write_merge(main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1,list_name[i], style2)
         list_test.append([main_day.index(list_day[i]),main_day.index(list_day[i]),main_time.index(list_time[i][:5]),main_time.index(list_time[i][6:])-1])
     #sorted(list_test) -> find blank cell
@@ -225,7 +225,6 @@ def gen():
                     cou = list_test[i][3]+1
                 i+=1
         i+=1
-    #sheet.write_merge(3,3,24,24,'', style3)
 
     sheet.portrait = False
     book.save('Schedule.xls')
